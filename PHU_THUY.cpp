@@ -10,7 +10,9 @@ void hhtuann()
     int a, b, c;
     cin >> a >> b >> c;
 
-    if (abs(b - c) % 3 == 0)
+    if (a == 0 && (b == 0 || c == 0))
+        cout << "NO" << endl;
+    else if (abs(b - c) % 3 == 0)
         cout << "YES" << endl;
     else
         cout << "NO" << endl;

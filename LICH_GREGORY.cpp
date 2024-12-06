@@ -5,28 +5,24 @@ using namespace std;
 #define endl '\n'
 #define LL long long
 
+int daysOfMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 bool isLeapYear(int y)
 {
     if ((y % 100 != 0 && y % 4 == 0) || (y % 400 == 0))
         return 1; // la nam nhuan
     return 0;
 }
-int daysOfMonth(int y, int m)
+int countDays(int y, int m, int d)
 {
-    if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12)
-        return 31;
-    else if (m == 4 || m == 6 || m == 9 || m == 11)
-        return 30;
-    else
-        return 28 + isLeapYear(y);
-}
-bool cmp(int d1, int m1, int y1, int d2, int m2, int y2)
-{
-    if (y1 != y2)
-        return y1 < y2;
-    if (m1 != m2)
-        return m1 < m2;
-    return d1 < d2;
+    int cnt = 0;
+    for (int i = 1; i < y; i++)
+        cnt += 365 + isLeapYear(i);
+
+    for (int i = 1; i < m; i++)
+        cnt += daysOfMonth[i] + (i == 2 && isLeapYear(y));
+
+    return cnt + d;
 }
 void hhtuann()
 {
@@ -34,42 +30,10 @@ void hhtuann()
     cin >> y1 >> m1 >> d1;
     cin >> y2 >> m2 >> d2;
 
-    if (cmp(d1, m1, y1, d2, m2, y2) == 0)
-    {
-        swap(y1, y2);
-        swap(m1, m2);
-        swap(d1, d2);
-    }
+    int count1 = countDays(y1, m1, d1);
+    int count2 = countDays(y2, m2, d2);
 
-    int days = 0;
-
-    if (y1 != y2)
-    {
-        for (int i = y1 + 1; i <= y2 - 1; i++)
-            days += 365 + isLeapYear(i);
-
-        for (int i = m1 + 1; i <= 12; i++)
-            days += daysOfMonth(y1, i);
-
-        for (int i = 1; i <= m2 - 1; i++)
-            days += daysOfMonth(y2, i);
-
-        days += daysOfMonth(y1, m1) - d1 + d2;
-    }
-    else
-    {
-        if (m1 != m2)
-        {
-            for (int i = m1 + 1; i < m2; i++)
-                days += daysOfMonth(y1, i);
-
-            days += daysOfMonth(y1, m1) - d1 + d2;
-        }
-        else
-            days = d2 - d1;
-    }
-
-    cout << days << endl;
+    cout << abs(count1 - count2) << endl;
 
     return;
 }
