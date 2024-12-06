@@ -12,19 +12,13 @@ void hhtuann()
     cin >> n >> s;
 
     int ans = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n - 2; i++)
     {
-        int j = i;
-        while (j < n && s[j] != s[j + 1])
-            j++;
-
-        int len = j - i + 1;
-        if (len >= 5)
-            ans += (len - 3) / 2;
-        else if (len >= 3)
-            ans += 1;
-
-        i = j;
+        if (s[i] == '0' && s[i + 1] == '1' && s[i + 2] == '0')
+        {
+            ans++;
+            i += 2;
+        }
     }
 
     cout << ans << endl;
