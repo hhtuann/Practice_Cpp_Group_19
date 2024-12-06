@@ -10,13 +10,9 @@ int rubik[25];
 bool isPerfect(int a[])
 {
     for (int i = 1; i <= 24; i += 4)
-    {
         for (int j = i; j < i + 4; j++)
-        {
             if (a[j] != a[i])
                 return false;
-        }
-    }
     return true;
 }
 bool Rotate(int matrix[4][4])
@@ -40,7 +36,6 @@ bool Rotate(int matrix[4][4])
     for (int i = 0; i < 4; ++i)
         for (int j = 0; j < 4; ++j)
             rotated[j][4 - i - 1] = matrix[i][j];
-
     for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
             right[matrix[i][j]] = rubik[rotated[i][j]];
