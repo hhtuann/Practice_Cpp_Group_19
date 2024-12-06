@@ -36,6 +36,11 @@ void hhtuann()
                 cout << "yes" << endl;
                 return;
             }
+            if (i >= 2 && j < 2 && check(a[i][j], a[i - 1][j + 1], a[i - 2][j + 2]))
+            {
+                cout << "yes" << endl;
+                return;
+            }
         }
     }
 
