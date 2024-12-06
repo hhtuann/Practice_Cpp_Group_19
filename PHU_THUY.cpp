@@ -10,10 +10,7 @@ void hhtuann()
     int a, b, c;
     cin >> a >> b >> c;
 
-    a += 2 * min(b, c);
-    b = max(b, c) - min(b, c);
-
-    if (b % 3 == 0 && b / 3 <= a)
+    if (abs(b - c) % 3 == 0)
         cout << "YES" << endl;
     else
         cout << "NO" << endl;
